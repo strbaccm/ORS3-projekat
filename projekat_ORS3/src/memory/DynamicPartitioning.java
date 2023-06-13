@@ -1,5 +1,9 @@
 package memory;
 
+import java.util.ArrayList;
+import kernel.Process;
+import kernel.ProcessScheduler;
+
 public abstract class DynamicPartitioning implements ProcessScheduler {
 	private ArrayList<Process> processes = new ArrayList<>();
 	
