@@ -13,8 +13,12 @@ public class Process implements Comparable<Process> {
 	private String path;
 	private int arrivalTime;
 	private int size;
+	private boolean alive;
 	ProcessControlBlock pcb;
 	Partition partition;
+
+	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
+	public static ArrayList<Process> processQueue = new ArrayList<>();
 	
 	private ArrayList<String> instructions = new ArrayList<String>();
 	
@@ -26,8 +30,11 @@ public class Process implements Comparable<Process> {
 		this.path = path;
 		this.arrivalTime = arrivalTime;
 		this.size = size;
+		this.alive = true;
 		this.partition = null;
 		readFile();
+		listOfProcesses.add(this);
+		processQueue.add(this);
 		
 	}
 	
@@ -45,9 +52,26 @@ public class Process implements Comparable<Process> {
 			e.printStackTrace();
 		}
 	}
+
+	public int getProcessPriority(Process p) {
+		int priority = 0;
+		Collections.sort(processQueue);
+		for(int i=0; i < processQueue.size(); i++) {
+			if(processQueue.get(i).getProcessID() == p.getProcessID() ) {
+				priority = i + 1 ;
+				break;
+			}
+		}
+		return priority;
+	}
+	
+	public void setProcessPriority() {
+		Collections.sort(processQueue);
+	}
 	
 	public void terminate() {
 		pcb.setProcessState(ProcessState.TERMINATED);
+		this.alive = false;
 	}
 	
 	public void block() {
@@ -60,6 +84,12 @@ public class Process implements Comparable<Process> {
 	
 	public void ready() {
 		pcb.setProcessState(ProcessState.READY);
+	}
+	public Partition getPartition() {
+		if( this.alive == false)
+			return null;
+		else 
+			return partition;
 	}
 	
 	public String getPath() {
@@ -79,10 +109,7 @@ public class Process implements Comparable<Process> {
 	}
 	
 	public boolean isProcessAlive() {
-		if(pcb.getProcessState().compareTo(ProcessState.RUNNING) == 0)
-			return true;
-		else
-			return false;
+		return this.alive;
 	}
 	
 	public int getProcessID() {
