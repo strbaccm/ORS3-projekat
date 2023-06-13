@@ -1,5 +1,7 @@
 package memory;
 
+import kernel.Process;
+
 public class Partition {
 	private static int index;
 	private final int size;
