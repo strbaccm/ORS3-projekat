@@ -3,6 +3,7 @@ package kernel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import memory.Memory;
 import memory.Partition;
@@ -104,7 +105,7 @@ public class Process implements Comparable<Process> {
 		return arrivalTime;
 	}
 	
-	public void setArrivaleTime(int arrivalTime) {
+	public void setArrivalTime(int arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 	
