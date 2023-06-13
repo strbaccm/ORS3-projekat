@@ -1,5 +1,8 @@
 package memory;
 
+import java.util.ArrayList;
+import kernel.Process;
+
 public class NextFit extends DynamicPartitioning {
 	private static int indexLast = 0; 
 	
