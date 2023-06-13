@@ -1,6 +1,7 @@
 package memory;
 
 import java.util.ArrayList;
+import kernel.Process;
 
 public class Memory {
 	private static int size = 1024;
