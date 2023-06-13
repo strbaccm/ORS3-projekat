@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import memory.Memory;
+import memory.Partition;
 
 public class Process implements Comparable<Process> {
 	private int processID;
@@ -12,6 +14,7 @@ public class Process implements Comparable<Process> {
 	private int arrivalTime;
 	private int size;
 	ProcessControlBlock pcb;
+	Partition partition;
 	
 	private ArrayList<String> instructions = new ArrayList<String>();
 	
@@ -23,6 +26,7 @@ public class Process implements Comparable<Process> {
 		this.path = path;
 		this.arrivalTime = arrivalTime;
 		this.size = size;
+		this.partition = null;
 		readFile();
 		
 	}
@@ -87,6 +91,24 @@ public class Process implements Comparable<Process> {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void freeMemory() {
+		partition = null;
+	}
+	
+	public boolean load(int indexP) {
+		this.partition = Memory.occupyPartition(indexP, this);
+		if(partition == null)
+			return false;
+		return true;
+	}
+	
+	public boolean load(Partition part) {
+		this.partition = Memory.occupyPartition(part, this);
+		if(this.partition == null)
+			return false;
+		return true;
 	}
 	
 	@Override
