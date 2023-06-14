@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Scanner;
 import memory.Memory;
 import memory.Partition;
@@ -12,7 +13,7 @@ public class Process implements Comparable<Process> {
 	private int processID;
 	private String name;
 	private String path;
-	private int arrivalTime;
+	private Date arrivalTime;
 	private int size;
 	private boolean alive;
 	ProcessControlBlock pcb;
@@ -24,12 +25,12 @@ public class Process implements Comparable<Process> {
 	private ArrayList<String> instructions = new ArrayList<String>();
 	
 	
-	public Process(int processID, String name, String path, int arrivalTime, int size) {
+	public Process(int processID, String name, String path, int size) {
 		this.pcb = new ProcessControlBlock();
 		this.processID = processID;
 		this.name = name;
 		this.path = path;
-		this.arrivalTime = arrivalTime;
+		this.arrivalTime = new Date();
 		this.size = size;
 		this.alive = true;
 		this.partition = null;
@@ -101,11 +102,11 @@ public class Process implements Comparable<Process> {
 		return size;
 	}
 	
-	public int getArrivalTime() {
+	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 	
-	public void setArrivalTime(int arrivalTime) {
+	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 	
@@ -149,8 +150,7 @@ public class Process implements Comparable<Process> {
 	//If the current object is greater than the object being compared, compareTo returns a positive integer.
 	@Override
 	public int compareTo(Process p) {
-		// TODO Auto-generated method stub
-		return this.arrivalTime - p.getArrivalTime();
+		return this.arrivalTime.compareTo(p.getArrivalTime());
 	}
 	
 
