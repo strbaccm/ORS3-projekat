@@ -24,7 +24,6 @@ public class Process implements Comparable<Process> {
 	
 	private ArrayList<String> instructions = new ArrayList<String>();
 	
-	
 	public Process(int processID, String name, String path, int size) {
 		this.pcb = new ProcessControlBlock();
 		this.processID = processID;
@@ -37,7 +36,6 @@ public class Process implements Comparable<Process> {
 		readFile();
 		listOfProcesses.add(this);
 		processQueue.add(this);
-		
 	}
 	
 	public void readFile() {
@@ -87,6 +85,7 @@ public class Process implements Comparable<Process> {
 	public void ready() {
 		pcb.setProcessState(ProcessState.READY);
 	}
+	
 	public Partition getPartition() {
 		if( this.alive == false)
 			return null;
@@ -146,12 +145,10 @@ public class Process implements Comparable<Process> {
 				+ pcb.getProcessState() + "]";
 	}
 	
-	//If the current object is less than the object being compared (other), compareTo returns a negative integer.
-	//If the current object is greater than the object being compared, compareTo returns a positive integer.
+	//If the current object came before the object being compared (other), compareTo returns a negative integer.
+	//If the current object came after the object being compared (other), compareTo returns a positive integer.
 	@Override
 	public int compareTo(Process p) {
 		return this.arrivalTime.compareTo(p.getArrivalTime());
 	}
-	
-
 }
