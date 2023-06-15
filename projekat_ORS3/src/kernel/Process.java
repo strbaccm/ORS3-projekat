@@ -20,7 +20,11 @@ public class Process implements Comparable<Process> {
 	Partition partition;
 
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
-	public static ArrayList<Process> processQueue = new ArrayList<>();
+	public static  PriorityQueue<Process> processQueue = new PriorityQueue<>();
+
+	//If you add elements to a PriorityQueue and those elements implement the Comparable interface, 
+	//the PriorityQueue will automatically maintain the elements in a sorted order based on their natural ordering. 
+	//Therefore, you don't need to sort them again explicitly.
 	
 	private ArrayList<String[]> instructions;
 	
@@ -55,22 +59,6 @@ public class Process implements Comparable<Process> {
 		}
 	}
 
-	public int getProcessPriority(Process p) {
-		int priority = 0;
-		Collections.sort(processQueue);
-		for(int i=0; i < processQueue.size(); i++) {
-			if(processQueue.get(i).getProcessID() == p.getProcessID() ) {
-				priority = i + 1 ;
-				break;
-			}
-		}
-		return priority;
-	}
-	
-	public void setProcessPriority() {
-		Collections.sort(processQueue);
-	}
-	
 	public void terminate() {
 		pcb.setProcessState(ProcessState.TERMINATED);
 		this.alive = false;
