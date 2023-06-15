@@ -22,7 +22,7 @@ public class Process implements Comparable<Process> {
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
 	public static ArrayList<Process> processQueue = new ArrayList<>();
 	
-	private ArrayList<String> instructions = new ArrayList<String>();
+	private ArrayList<String[]> instructions;
 	
 	public Process(int processID, String name, String path, int size) {
 		this.pcb = new ProcessControlBlock();
@@ -33,6 +33,7 @@ public class Process implements Comparable<Process> {
 		this.size = size;
 		this.alive = true;
 		this.partition = null;
+		instructions = new ArrayList<>();
 		readFile();
 		listOfProcesses.add(this);
 		processQueue.add(this);
@@ -44,9 +45,10 @@ public class Process implements Comparable<Process> {
 		Scanner reader = new Scanner(file);
 		while(reader.hasNextLine()) {
 			String line = reader.nextLine();
-			instructions.add(line);
-		reader.close();
+			String [] instruction = line.split(" ");
+			instructions.add(instruction);
 		}
+			reader.close();
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -84,6 +86,10 @@ public class Process implements Comparable<Process> {
 	
 	public void ready() {
 		pcb.setProcessState(ProcessState.READY);
+	}
+
+	public ArrayList<String[]> getInstrucstions(){
+		return instructions;
 	}
 	
 	public Partition getPartition() {
