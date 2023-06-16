@@ -25,4 +25,8 @@ public class ProcessControlBlock {
 	public int getPriority() {
 		return priority;
 	}
+
+	public void savingPriority(int priority) {
+		this.priority = priority;
+	}
 }
