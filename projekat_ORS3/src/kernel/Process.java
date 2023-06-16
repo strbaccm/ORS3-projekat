@@ -18,6 +18,7 @@ public class Process implements Comparable<Process> {
 	private int startAdress;
 	private int[] valuesOfRegister;
 	private ArrayList<String> instructions;
+	private int pcValue = -1;
 	
 	public Process(String name, Path path) {
 		this.pcb = new ProcessControlBlock();
