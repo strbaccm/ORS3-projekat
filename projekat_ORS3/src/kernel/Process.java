@@ -17,13 +17,6 @@ public class Process implements Comparable<Process> {
 	private boolean alive;
 	ProcessControlBlock pcb;
 	Partition partition;
-
-	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
-	public static  PriorityQueue<Process> processQueue = new PriorityQueue<>();
-
-	//If you add elements to a PriorityQueue and those elements implement the Comparable interface, 
-	//the PriorityQueue will automatically maintain the elements in a sorted order based on their natural ordering. 
-	//Therefore, you don't need to sort them again explicitly.
 	
 	private ArrayList<String[]> instructions;
 	
