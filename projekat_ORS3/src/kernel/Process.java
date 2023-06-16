@@ -1,85 +1,83 @@
 package kernel;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 import memory.Memory;
 import memory.Partition;
 
 public class Process implements Comparable<Process> {
 	private int processID;
 	private String name;
-	private String path;
+	private Path path;
 	private Date arrivalTime;
 	private int size;
-	private boolean alive;
-	ProcessControlBlock pcb;
-	Partition partition;
+	private ProcessControlBlock pcb;
+	private Partition partition;
+	private int startAdress;
+	private int[] valuesOfRegister;
+	private ArrayList<String> instructions;
 	
-	private ArrayList<String[]> instructions;
-	
-	public Process(int processID, String name, String path, int size) {
+	public Process(String name, Path path) {
 		this.pcb = new ProcessControlBlock();
-		this.processID = processID;
+		this.processID = ProcessScheduler.listOfProcesses.size();
 		this.name = name;
 		this.path = path;
 		this.arrivalTime = new Date();
-		this.size = size;
-		this.alive = true;
-		this.partition = null;
+		valuesOfRegister = new int[4];
 		instructions = new ArrayList<>();
 		readFile();
-		listOfProcesses.add(this);
-		processQueue.add(this);
+		this.size = instructions.size();
+		this.partition = null;
+		ProcessScheduler.listOfProcesses.add(this);
+		ProcessScheduler.processQueue.add(this);
+
 	}
 	
 	public void readFile() {
-		try {
-		File file = new File(this.path);
-		Scanner reader = new Scanner(file);
-		while(reader.hasNextLine()) {
-			String line = reader.nextLine();
-			String [] instruction = line.split(" ");
-			instructions.add(instruction);
+	
+	}
+	
+	public void block() {
+		if (this.getPCB().getProcessState() == ProcessState.RUNNING) {
+			this.getPCB().setProcessState(ProcessState.BLOCKED);
+			if (ProcessScheduler.processQueue.contains(this))
+				ProcessScheduler.processQueue.remove(this);
 		}
-			reader.close();
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
+	}
+
+	public void unblock() {
+		if (this.getPCB().getProcessState() == ProcessState.BLOCKED) {
+			this.getPCB().setProcessState(ProcessState.READY);
+			System.out.println("Process " + this.getName() + " is unblocked");
+			ProcessScheduler.processQueue.add(this);
 		}
 	}
 
 	public void terminate() {
-		pcb.setProcessState(ProcessState.TERMINATED);
-		this.alive = false;
+		if (this.getPCB().getProcessState() == ProcessState.READY || this.getPCB().getProcessState() == ProcessState.RUNNING) {
+			this.getPCB().setProcessState(ProcessState.TERMINATED);
+			if (ProcessScheduler.processQueue.contains(this))
+				ProcessScheduler.processQueue.remove(this);
+		} else if (this.getPCB().getProcessState() == ProcessState.BLOCKED) {
+			this.getPCB().setProcessState(ProcessState.TERMINATED);
+		}
 	}
 	
-	public void block() {
-		pcb.setProcessState(ProcessState.BLOCKED);
-	}
-	
-	public void run() {
-		pcb.setProcessState(ProcessState.RUNNING);
-	}
-	
-	public void ready() {
-		pcb.setProcessState(ProcessState.READY);
-	}
-
-	public ArrayList<String[]> getInstrucstions(){
+	public ArrayList<String> getInstrucstions(){
 		return instructions;
 	}
 	
 	public Partition getPartition() {
-		if( this.alive == false)
-			return null;
-		else 
-			return partition;
+		return partition;
 	}
 	
-	public String getPath() {
+	public ProcessControlBlock getPCB() {
+		return pcb;
+	}
+	
+	public Path getPath() {
 		return path;
 	}
 	
@@ -93,10 +91,6 @@ public class Process implements Comparable<Process> {
 	
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
-	}
-	
-	public boolean isProcessAlive() {
-		return this.alive;
 	}
 	
 	public int getProcessID() {
