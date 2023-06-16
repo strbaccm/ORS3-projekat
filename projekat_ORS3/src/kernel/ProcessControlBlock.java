@@ -9,26 +9,11 @@ import java.util.Scanner;
 public class ProcessControlBlock {
 	private ProcessState state;
 	private int priority;
-	
-	private ArrayList<String> associatedFiles = new ArrayList<String>();
-	
-	
+
 	public ProcessControlBlock () {
-		this.state = ProcessState.NEW;
-		associatedFiles = new ArrayList<String>();
-		
-	}
-	
-	
-	
-	public ArrayList<String> getAssociatedFiles() {
-		return associatedFiles;
+		this.state = ProcessState.NEW;	
 	}
 
-	public void addToAssociatedFiles(String s) {
-		this.associatedFiles.add(s);
-	}
-	
 	public ProcessState getProcessState() {
 		return state;
 	}
@@ -40,11 +25,4 @@ public class ProcessControlBlock {
 	public int getPriority() {
 		return priority;
 	}
-	
-
-	
-
-	
-	
-
 }
