@@ -1,0 +1,81 @@
+package kernel;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class ProcessScheduler extends Thread{
+	
+	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
+	public static PriorityQueue<Process> processQueue = new PriorityQueue<>();
+	
+	public ProcessScheduler() {
+	}
+	
+	public int getProcessPriority(Process p) {
+		int priority = 0;
+		ArrayList<Process> pQ = new ArrayList<>(processQueue);
+		for(int i=0; i < pQ.size(); i++) {
+			if(pQ.get(i).getProcessID() == p.getProcessID() ) {
+				priority = i + 1 ;
+				ProcessControlBlock pcb = p.getPCB();
+				pcb.savingPriority(priority);
+				break;
+			}
+		}
+		return priority;
+	}
+	
+	@Override
+	public void run() {
+		while(!processQueue.isEmpty()) {
+			Process next = processQueue.poll();
+			executeProcess(next);
+			if(next.getPCB().getProcessState() != ProcessState.BLOCKED && 
+					next.getPCB().getProcessState() != ProcessState.TERMINATED &&
+					next.getPCB().getProcessState() != ProcessState.DONE) {
+				next.getPCB().setProcessState(ProcessState.READY);
+				processQueue.add(next);
+			}
+		}
+		System.out.println("There are no processes left to be executed!");
+		
+	}
+	
+	private static void executeProcess(Process p) {
+		
+	}
+	
+	public static void blockProcess(int pID) {
+		if(pID < listOfProcesses.size()) {
+			listOfProcesses.get(pID).block();
+			return;
+		}
+		System.out.println("Process with this processID " + pID + " doesn't exist");
+	}
+	
+	public static void unblockProcess(int pID) {
+		if(pID < listOfProcesses.size()) {
+			listOfProcesses.get(pID).unblock();
+			return;
+		}
+		System.out.println("Process with this processID " + pID + " doesn't exist");
+	}
+	
+	public static void terminateProcess(int pID) {
+		if(pID < listOfProcesses.size()) {
+			listOfProcesses.get(pID).terminate();
+			return;
+		}
+		System.out.println("Process with this processID " + pID + " doesn't exist");
+	}
+	
+	public PriorityQueue<Process> getProcessQueue(){
+		return processQueue;
+	}
+	
+
+}
