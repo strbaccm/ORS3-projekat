@@ -113,24 +113,6 @@ public class Process implements Comparable<Process> {
 		return name;
 	}
 	
-	public void freeMemory() {
-		partition = null;
-	}
-	
-	public boolean load(int indexP) {
-		this.partition = Memory.occupyPartition(indexP, this);
-		if(partition == null)
-			return false;
-		return true;
-	}
-	
-	public boolean load(Partition part) {
-		this.partition = Memory.occupyPartition(part, this);
-		if(this.partition == null)
-			return false;
-		return true;
-	}
-	
 	@Override
 	public String toString() {
 		return "Process : [pId = " + this.getProcessID() + ", name = " + name + ", path = " + path + ", state = "
