@@ -4,7 +4,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
-import memory.Memory;
 import memory.Partition;
 
 public class Process implements Comparable<Process> {
@@ -66,7 +65,15 @@ public class Process implements Comparable<Process> {
 		}
 	}
 	
-	public ArrayList<String> getInstrucstions(){
+	public int getStartAdress() {
+		return startAdress;
+	}
+
+	public void setStartAdress(int startAdress) {
+		this.startAdress = startAdress;
+	}
+	
+	public ArrayList<String> getInstructions(){
 		return instructions;
 	}
 	
