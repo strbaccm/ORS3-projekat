@@ -11,7 +11,7 @@ public class ProcessControlBlock {
 	private int priority;
 
 	public ProcessControlBlock () {
-		this.state = ProcessState.NEW;	
+		this.state = ProcessState.READY;	
 	}
 
 	public ProcessState getProcessState() {
