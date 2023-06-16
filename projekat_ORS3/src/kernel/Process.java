@@ -97,6 +97,10 @@ public class Process implements Comparable<Process> {
 	public int getProcessID() {
 		return processID;
 	}
+
+	public int getPCValue() {
+		return pcValue;
+	}
 	
 	public String getName() {
 		return name;
