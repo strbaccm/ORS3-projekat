@@ -46,7 +46,55 @@ public class ProcessScheduler extends Thread{
 	}
 	
 	private static void executeProcess(Process p) {
-		
+		Shell.currentlyExecuting = p;
+		if( p.getPCValue() == -1 ) {
+			System.out.println("Process " + p.getName() + " started executiong!");
+			int startAdress = Shell.memory.loadProcess(p);
+			p.setStartAdress(startAdress);
+			Shell.base = startAdress;
+			Shell.limit = p.getInstrucstions().size();
+			Shell.PG = 0;
+			p.getPCB().setProcessState(ProcessState.RUNNING);
+			execute(p, System.currentTimeMillis());
+		}
+		else {
+			System.out.println("Process " + p.getName() + " is executing again");
+			int startAdress = Shell.memory.loadProcess(p);
+			p.setStartAdress(startAdress);
+			Shell.base = startAdress;
+			Shell.limit = p.getInstrucstions().size();
+			Shell.loadValues();
+			p.getPCB().setProcessState(ProcessState.RUNNING);
+			execute(p, System.currentTimeMillis());
+		}
+	}
+
+	private static void execute(Process p, long startTime) {	
+		while(p.getPCB().getProcessState() == ProcessState.RUNNING &&
+				System.currentTimeMillis() - startTime < timeQuantum) {
+			int t = RAM.get(Shell.PG + Shell.base);
+			String instruction = Shell.fromIntToInstruction(t);
+			Shell.IR = instruction;
+			Shell.executeMachineInstruction();
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("Error with thread");
+		}
+		if (p.getPCB().getProcessState() == ProcessState.BLOCKED) {
+			System.out.println("Process " + p.getName() + " is blocked!");
+			Shell.saveValues();
+		} else if (p.getPCB().getProcessState() == ProcessState.TERMINATED) {
+			System.out.println("Process " + p.getName() + " is terminated!");
+			Memory.removeProcess(p);
+		} else if (p.getPCB().getProcessState() == ProcessState.DONE) {
+			System.out.println("Process " + p.getName() + " is done!");
+			Memory.removeProcess(p);
+		} else { // process is switched by process scheduler
+			Shell.saveValues();
+		}
+		Operations.clearReg();
 	}
 	
 	public static void blockProcess(int pID) {
