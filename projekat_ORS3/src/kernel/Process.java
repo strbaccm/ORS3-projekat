@@ -62,6 +62,7 @@ public class Process implements Comparable<Process> {
 				ProcessScheduler.processQueue.remove(this);
 		} else if (this.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			this.getPCB().setProcessState(ProcessState.TERMINATED);
+			Memory.removeProcess(this);
 		}
 	}
 	
