@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
-import asembler.Operations;
+import assembler.Operations;
 import memory.Memory;
 import memory.Disk;
 import memory.RAM;
