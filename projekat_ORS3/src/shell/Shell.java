@@ -14,6 +14,8 @@ public class Shell {
 	public static Process currentlyExecuting = null;
 	public static int PG; 
 	public static String IR;
+	public static int base;
+	public static int limit;
 
   public static void executeMachineInstruction() {
 		String operation = IR.substring(0,4);
