@@ -58,7 +58,7 @@ public class ProcessScheduler extends Thread{
 			int startAdress = Shell.memory.loadProcess(p);
 			p.setStartAdress(startAdress);
 			Shell.base = startAdress;
-			Shell.limit = p.getInstrucstions().size();
+			Shell.limit = p.getInstructions().size();
 			Shell.PG = 0;
 			p.getPCB().setProcessState(ProcessState.RUNNING);
 			execute(p, System.currentTimeMillis());
@@ -68,7 +68,7 @@ public class ProcessScheduler extends Thread{
 			int startAdress = Shell.memory.loadProcess(p);
 			p.setStartAdress(startAdress);
 			Shell.base = startAdress;
-			Shell.limit = p.getInstrucstions().size();
+			Shell.limit = p.getInstructions().size();
 			Shell.loadValues();
 			p.getPCB().setProcessState(ProcessState.RUNNING);
 			execute(p, System.currentTimeMillis());
