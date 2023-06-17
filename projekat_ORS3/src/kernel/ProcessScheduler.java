@@ -14,7 +14,7 @@ import shell.Shell;
 
 
 public class ProcessScheduler extends Thread{
-	
+	private static int timeQuantum = 1;
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
 	public static PriorityQueue<Process> processQueue = new PriorityQueue<>();
 	
