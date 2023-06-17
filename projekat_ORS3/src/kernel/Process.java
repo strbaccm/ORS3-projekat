@@ -4,7 +4,9 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
+import memory.Memory;
 import memory.Partition;
+import shell.Shell;
 
 public class Process implements Comparable<Process> {
 	private int processID;
@@ -36,6 +38,19 @@ public class Process implements Comparable<Process> {
 	}
 	
 	public void readFile() {
+		String data = Shell.disk.readFile(Shell.disk.getFile(name));
+		String [] commands = data.split("\\n");
+		for(String command : commands) {
+			if( !command.equals(commands[commands.length-1]) ) {
+				command = command.substring(0, command.length() -1);
+			}
+			else {
+				if( command.length() > 3 )
+					command = command.substring(0,3);
+			}
+		String machineIstruction = Shell.assemblerToMachineInstruction(command);
+		instructions.add(machineIstruction);
+		}
 	
 	}
 	
