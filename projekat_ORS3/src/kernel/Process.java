@@ -15,7 +15,7 @@ public class Process implements Comparable<Process> {
 	private ProcessControlBlock pcb;
 	private Partition partition;
 	private int startAdress;
-	private int[] valuesOfRegister;
+	private int[] valuesOfRegisters;
 	private ArrayList<String> instructions;
 	private int pcValue = -1;
 	
@@ -64,6 +64,15 @@ public class Process implements Comparable<Process> {
 			this.getPCB().setProcessState(ProcessState.TERMINATED);
 			Memory.removeProcess(this);
 		}
+	}
+
+	public int[] getValuesOfRegisters() {
+		return valuesOfRegisters;
+	}
+
+	public void setValuesOfRegisters(int[] valuesOfRegisters) {
+		for (int i = 0; i < valuesOfRegisters.length; i++)
+			this.valuesOfRegisters[i] = valuesOfRegisters[i];
 	}
 	
 	public int getStartAdress() {
