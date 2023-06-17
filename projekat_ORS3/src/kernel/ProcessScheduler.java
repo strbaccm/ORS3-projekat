@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import asembler.Operations;
+import memory.Memory;
+import memory.Disk;
+import memory.RAM;
+import shell.Shell;
+
 
 public class ProcessScheduler extends Thread{
 	
