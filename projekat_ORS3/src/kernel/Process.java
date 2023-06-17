@@ -27,7 +27,7 @@ public class Process implements Comparable<Process> {
 		this.name = name;
 		this.path = path;
 		this.arrivalTime = new Date();
-		valuesOfRegister = new int[4];
+		valuesOfRegisters = new int[4];
 		instructions = new ArrayList<>();
 		readFile();
 		this.size = instructions.size();
