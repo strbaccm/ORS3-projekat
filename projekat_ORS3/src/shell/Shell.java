@@ -1,7 +1,7 @@
 package shell;
 
-import asembler.Constants;
-import asembler.Operations;
+import assembler.Constants;
+import assembler.Operations;
 import fileSystem.FileSystem;
 import memory.Disk;
 import memory.Memory;
