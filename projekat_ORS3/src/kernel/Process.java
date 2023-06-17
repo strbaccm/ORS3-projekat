@@ -118,6 +118,10 @@ public class Process implements Comparable<Process> {
 	public int getPCValue() {
 		return pcValue;
 	}
+
+	public void setPCValues(int pcValue) {
+		this.pcValue = pcValue;
+	}
 	
 	public String getName() {
 		return name;
