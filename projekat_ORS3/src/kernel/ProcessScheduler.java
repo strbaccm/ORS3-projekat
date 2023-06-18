@@ -68,6 +68,7 @@ public class ProcessScheduler{
 		if (p.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			System.out.println("Process " + p.getName() + " is blocked!");
 			Shell.saveValues();
+			p.setStartAdress(p.getStartAdress() + p.getPGCounter());
 		}
 		else if (p.getPCB().getProcessState() == ProcessState.TERMINATED) {
 			System.out.println("Process " + p.getName() + " is terminated!");
