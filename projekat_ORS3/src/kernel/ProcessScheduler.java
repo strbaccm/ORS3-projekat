@@ -13,8 +13,7 @@ import memory.RAM;
 import shell.Shell;
 
 
-public class ProcessScheduler extends Thread{
-	private static int timeQuantum = 1;
+public class ProcessScheduler{
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
 	public static PriorityQueue<Process> processQueue = new PriorityQueue<>();
 	
@@ -35,51 +34,41 @@ public class ProcessScheduler extends Thread{
 		return priority;
 	}
 	
-	@Override
 	public void run() {
 		while(!processQueue.isEmpty()) {
 			Process next = processQueue.poll();
 			executeProcess(next);
-			if(next.getPCB().getProcessState() != ProcessState.BLOCKED && 
-					next.getPCB().getProcessState() != ProcessState.TERMINATED &&
-					next.getPCB().getProcessState() != ProcessState.DONE) {
-				next.getPCB().setProcessState(ProcessState.READY);
-				processQueue.add(next);
-			}
-		}
+		}	
 		System.out.println("There are no processes left to be executed!");
-		
 	}
 	
 	private static void executeProcess(Process p) {
 		Shell.currentlyExecuting = p;
-		if( p.getPCValue() == -1 ) {
+		if( p.getPCValue() == -1 ) { //izvrsavanje novog procesa
 			System.out.println("Process " + p.getName() + " started executiong!");
 			int startAdress = Shell.memory.loadProcess(p);
 			p.setStartAdress(startAdress);
 			Shell.base = startAdress;
 			Shell.limit = p.getInstructions().size();
-			Shell.PG = 0;
 			p.getPCB().setProcessState(ProcessState.RUNNING);
-			execute(p, System.currentTimeMillis());
+			executeP(p);
 		}
-		else {
-			System.out.println("Process " + p.getName() + " is executing again");
+		else { //izvrsavanje unblocked procesa
+			System.out.println("Process " + p.getName() + " is unblocked and executing again");
 			int startAdress = Shell.memory.loadProcess(p);
 			p.setStartAdress(startAdress);
 			Shell.base = startAdress;
 			Shell.limit = p.getInstructions().size();
 			Shell.loadValues();
 			p.getPCB().setProcessState(ProcessState.RUNNING);
-			execute(p, System.currentTimeMillis());
+			executeP(p);
 		}
 	}
 
-	private static void execute(Process p, long startTime) {	
-		while(p.getPCB().getProcessState() == ProcessState.RUNNING &&
-				System.currentTimeMillis() - startTime < timeQuantum) {
-			int t = RAM.get(Shell.PG + Shell.base);
-			String instruction = Shell.fromIntToInstruction(t);
+	private static void executeP(Process p) {	
+		while(p.getPCB().getProcessState() == ProcessState.RUNNING) {
+			int ramValue = RAM.get(Shell.base);
+			String instruction = Shell.fromIntToInstruction(ramValue);
 			Shell.IR = instruction;
 			Shell.executeMachineInstruction();
 		}
@@ -91,15 +80,15 @@ public class ProcessScheduler extends Thread{
 		if (p.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			System.out.println("Process " + p.getName() + " is blocked!");
 			Shell.saveValues();
-		} else if (p.getPCB().getProcessState() == ProcessState.TERMINATED) {
+		}
+		else if (p.getPCB().getProcessState() == ProcessState.TERMINATED) {
 			System.out.println("Process " + p.getName() + " is terminated!");
 			Memory.removeProcess(p);
-		} else if (p.getPCB().getProcessState() == ProcessState.DONE) {
+		} 
+		else if (p.getPCB().getProcessState() == ProcessState.DONE) {
 			System.out.println("Process " + p.getName() + " is done!");
 			Memory.removeProcess(p);
-		} else { // process is switched by process scheduler
-			Shell.saveValues();
-		}
+		} 
 		Operations.clearReg();
 	}
 	
