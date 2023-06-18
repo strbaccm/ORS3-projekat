@@ -59,7 +59,6 @@ public class Process implements Comparable<Process> {
 			this.getPCB().setProcessState(ProcessState.BLOCKED);
 			if (ProcessScheduler.processQueue.contains(this))
 				ProcessScheduler.processQueue.remove(this);
-				this.setStartAdress(startAdress + pgCounter);
 		}
 	}
 
