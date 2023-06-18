@@ -44,25 +44,13 @@ public class ProcessScheduler{
 	
 	private static void executeProcess(Process p) {
 		Shell.currentlyExecuting = p;
-		if( p.getPCValue() == -1 ) { //izvrsavanje novog procesa
-			System.out.println("Process " + p.getName() + " started executiong!");
-			int startAdress = Shell.memory.loadProcess(p);
-			p.setStartAdress(startAdress);
-			Shell.base = startAdress;
-			Shell.limit = p.getInstructions().size();
-			p.getPCB().setProcessState(ProcessState.RUNNING);
-			executeP(p);
-		}
-		else { //izvrsavanje unblocked procesa
-			System.out.println("Process " + p.getName() + " is unblocked and executing again");
-			int startAdress = Shell.memory.loadProcess(p);
-			p.setStartAdress(startAdress);
-			Shell.base = startAdress;
-			Shell.limit = p.getInstructions().size();
-			Shell.loadValues();
-			p.getPCB().setProcessState(ProcessState.RUNNING);
-			executeP(p);
-		}
+		System.out.println("Process " + p.getName() + " started executiong!");
+		int startAdress = Shell.memory.loadProcess(p);
+		p.setStartAdress(startAdress);
+		Shell.base = startAdress;
+		Shell.limit = p.getInstructions().size();
+		p.getPCB().setProcessState(ProcessState.RUNNING);
+		executeP(p);
 	}
 
 	private static void executeP(Process p) {	
