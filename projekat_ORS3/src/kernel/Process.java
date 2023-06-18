@@ -19,7 +19,7 @@ public class Process implements Comparable<Process> {
 	private int startAdress;
 	private int[] valuesOfRegisters;
 	private ArrayList<String> instructions;
-	private int pcValue = -1;
+	private int pgCounter = 1;
 	
 	public Process(String name, Path path) {
 		this.pcb = new ProcessControlBlock();
@@ -59,25 +59,26 @@ public class Process implements Comparable<Process> {
 			this.getPCB().setProcessState(ProcessState.BLOCKED);
 			if (ProcessScheduler.processQueue.contains(this))
 				ProcessScheduler.processQueue.remove(this);
+				this.setStartAdress(startAdress + pgCounter);
 		}
 	}
 
 	public void unblock() {
 		if (this.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			this.getPCB().setProcessState(ProcessState.READY);
-			System.out.println("Process " + this.getName() + " is unblocked");
+			this.setArrivalTime(new Date());
 			ProcessScheduler.processQueue.add(this);
+			System.out.println("Process " + this.getName() + " is unblocked");
+			
 		}
 	}
 
 	public void terminate() {
-		if (this.getPCB().getProcessState() == ProcessState.READY || this.getPCB().getProcessState() == ProcessState.RUNNING) {
-			this.getPCB().setProcessState(ProcessState.TERMINATED);
-			if (ProcessScheduler.processQueue.contains(this))
-				ProcessScheduler.processQueue.remove(this);
-		} else if (this.getPCB().getProcessState() == ProcessState.BLOCKED) {
-			this.getPCB().setProcessState(ProcessState.TERMINATED);
-			Memory.removeProcess(this);
+		if (this.getPCB().getProcessState() == ProcessState.READY || this.getPCB().getProcessState() == ProcessState.RUNNING ||
+				this.getPCB().getProcessState() == ProcessState.BLOCKED) {
+			    this.getPCB().setProcessState(ProcessState.TERMINATED);
+			    if (ProcessScheduler.processQueue.contains(this))
+					ProcessScheduler.processQueue.remove(this);
 		}
 	}
 
@@ -88,6 +89,14 @@ public class Process implements Comparable<Process> {
 	public void setValuesOfRegisters(int[] valuesOfRegisters) {
 		for (int i = 0; i < valuesOfRegisters.length; i++)
 			this.valuesOfRegisters[i] = valuesOfRegisters[i];
+	}
+
+	public int getPGCounter() {
+		return pgCounter;
+	}
+	
+	public void incpgCOUNTER() {
+		pgCounter++;
 	}
 	
 	public int getStartAdress() {
@@ -128,14 +137,6 @@ public class Process implements Comparable<Process> {
 	
 	public int getProcessID() {
 		return processID;
-	}
-
-	public int getPCValue() {
-		return pcValue;
-	}
-
-	public void setPCValues(int pcValue) {
-		this.pcValue = pcValue;
 	}
 	
 	public String getName() {
