@@ -11,15 +11,13 @@ public class Shell {
   public static FileSystem tree;
 	public static Memory memory;
 	public static Disk disk;
-	public static Process currentlyExecuting = null;
-	public static int PG; 
+	public static Process currentlyExecuting = null; 
 	public static String IR;
 	public static int base;
 	public static int limit;
 
   public static void executeMachineInstruction() {
 		String operation = IR.substring(0,4);
-		boolean programCounterChanged = false;
 		
 		if(operation.equals(Operations.hlt)) {
 			Operations.hlt();
@@ -85,8 +83,6 @@ public class Shell {
 			String reg = IR.substring(4,8);
 			Operations.dec(reg);
 		}
-		if (!programCounterChanged)
-			PG++;
 	}
 
   public static String assemblerToMachineInstruction(String line) {
