@@ -83,6 +83,7 @@ public class Shell {
 			String reg = IR.substring(4,8);
 			Operations.dec(reg);
 		}
+	  currentlyExecuting.incpgCOUNTER();
 	}
 
   public static String assemblerToMachineInstruction(String line) {
@@ -244,7 +245,6 @@ public class Shell {
   public static void saveValues() {
 		int [] registers = {Operations.R1.value, Operations.R2.value, Operations.R3.value, Operations.R4.value};
 		currentlyExecuting.setValuesOfRegisters(registers);
-		currentlyExecuting.setPCValues(PG);
 	}
   
   public static void loadValues() {
@@ -253,6 +253,5 @@ public class Shell {
 		Operations.R2.value = registers[1];
 		Operations.R3.value = registers[2];
 		Operations.R4.value = registers[3];
-		PG = currentlyExecuting.getPCValue();
 	}
 }
