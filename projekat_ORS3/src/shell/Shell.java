@@ -93,112 +93,111 @@ public class Shell {
 		String instruction = "";
 		String []command = line.split("[ |, ]");
 		
-		switch(command[0]) {
-		case "HLT":
+		//PREVOD U OPERACIJU
+		if (command[0].equals("HLT")) {
 			instruction += Operations.hlt;
-			break;
-		case "MOV":
+		}
+		else if(command[0].equals("MOV")) {
 			instruction += Operations.mov;
-			break;
-		case "ADD":
+		}
+		else if(command[0].equals("ADD")) {
 			instruction += Operations.add;
-			break;
-		case "SUB":
+		}
+		else if(command[0].equals("SUB")) {
 			instruction += Operations.sub;
-			break;
-		case "MUL":
+		}
+		else if(command[0].equals("MUL")) {
 			instruction += Operations.mul;
-			break;
-		case "JMP":
+		}
+		else if(command[0].equals("JMP")) {
 			instruction += Operations.jmp;
-			break;
-		case "DEC":
+		}
+		else if(command[0].equals("DEC")) {
 			instruction += Operations.dec;
-			break;
-		case "INC":
+		}
+		else if(command[0].equals("INC")) {
 			instruction += Operations.inc;
-			break;
-		case "DIV":
+		}
+		else if(command[0].equals("DIV")) {
 			instruction += Operations.div;
-			break;
 		}
 		
+		// OBRADA UKOLIKO NAM JE OPERACIJA HLT
 		if(command[0].equals("HLT")) {
 			return instruction;
 		}
+		// OBRADA UKOLIKO NAM JE OPERACIJA JMP
 		else if(command[0].equals("JMP")) {
 			instruction += toBinary(command[1]);
 			return instruction;
-			
 		}
+		//SLUCAJ KADA SU NA PRVOJ POZICIJI OPERACIJE DEC I INC
 		else if(command[0].equals("INC") || command[0].equals("DEC")) {
-			switch(command[1]) {
-			case "R1":
+			
+			// OBRADA REGISTRA
+			if(command[1].equals("R1")) {
 				instruction += Constants.R1;
-				break;
-			case "R2":
+			}
+			else if(command[1].equals("R2")) {
 				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
+			}
+			else if(command[1].equals("R2")) {
+				instruction += Constants.R2;
+			}
+			else if(command[1].equals("R2")) {
+				instruction += Constants.R2;
 			}
 			return instruction;
 		}
 		
+		//PROVJERA AKO NA OBJE POZICIJE IMAMO REGISTRE
 		else if(command[2].equals("R1") || command[2].equals("R2") || 
 				command[2].equals("R3") || command[2].equals("R4")) {
-			switch(command[1]) {
-			case "R1":
+			
+			if(command[1].equals("R1")) {
 				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;	
 			}
-			switch(command[2]) {
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
+			else if(command[1].equals("R2")) {
 				instruction += Constants.R2;
-				break;
-			case "R3":
+			}
+			else if(command[1].equals("R3")) {
 				instruction += Constants.R3;
-				break;
-			case "R4":
+			}
+			else if(command[1].equals("R4")) {
 				instruction += Constants.R4;
-				break;	
+			}
+			
+			if(command[2].equals("R1")) {
+				instruction += Constants.R1;
+			}
+			else if(command[2].equals("R2")) {
+				instruction += Constants.R2;
+			}
+			else if(command[2].equals("R3")) {
+				instruction += Constants.R3;
+			}
+			else if(command[2].equals("R4")) {
+				instruction += Constants.R4;
 			}
 			return instruction;
 		}
+		//OBRADA U SLUCAJU DA NAM SE NA PRVOM MJESTU NALAZI REGISTAR A NA DRUGOME VRIJEDNOST
 		else {
-			switch(command[1]) {
-			case "R1":
+			if(command[1].equals("R1")) {
 				instruction += Constants.R1;
-				break;
-			case "R2":
+			}
+			else if(command[1].equals("R2")) {
 				instruction += Constants.R2;
-				break;
-			case "R3":
+			}
+			else if(command[1].equals("R3")) {
 				instruction += Constants.R3;
-				break;
-			case "R4":
+			}
+			else if(command[1].equals("R4")) {
 				instruction += Constants.R4;
-				break;	
 			}
 			instruction += toBinary(command[2]);
 			return instruction;
-		}	
+		}
 	}
 
   private static String toBinary(String s) {
