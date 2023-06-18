@@ -104,10 +104,16 @@ public class ProcessScheduler{
 		}
 		System.out.println("Process with this processID " + pID + " doesn't exist");
 	}
+
+	public static void printProcesses() {
+		System.out.println("PID\tProgram\t\tSize\tState\t\tCurrent occupation of memory");
+		for (Process process : listOfProcesses)
+			System.out.println(process.getProcessID() + "\t" + process.getName() + "\t  " + process.getSize() + "\t"
+					+ process.getPCB().getProcessState() + "\t " +
+					+ Memory.memoryOccupiedByProcessSize(process));
+	}
 	
 	public PriorityQueue<Process> getProcessQueue(){
 		return processQueue;
 	}
-	
-
 }
