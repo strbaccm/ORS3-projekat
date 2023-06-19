@@ -1,11 +1,13 @@
 package shell;
 
+import java.io.File;
 import assembler.Constants;
 import assembler.Operations;
 import fileSystem.FileSystem;
 import memory.Disk;
 import memory.Memory;
 import kernel.Process;
+import kernel.ProcessScheduler;
 
 public class Shell {
   public static FileSystem tree;
@@ -15,6 +17,14 @@ public class Shell {
 	public static String IR;
 	public static int base;
 	public static int limit;
+
+	
+public static void booting() {
+		new ProcessScheduler();
+		memory = new Memory();
+		disk = new Disk();
+		tree = new FileSystem(new File("PROGRAMS"));
+	}
 
   public static void executeMachineInstruction() {
 		String operation = IR.substring(0,4);
