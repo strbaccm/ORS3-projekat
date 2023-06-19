@@ -81,12 +81,12 @@ public class Operations {
 				public static void div(String reg,String val) {
 					Register r=getRegister(reg);
 					if(val.length()==8) { 
-						if(r!=null)
+						if(r!=null && !val.equals("00000000"))
 							r.value=r.value/Integer.parseInt(val,2);
 					}
 					else if (val.length()==4) {
 						Register r2=getRegister(val);
-						if(r!=null && r2!=null)
+						if(r!=null && r2!=null && r2.value!=0)
 							r.value=r.value / r2.value;
 					}
 				}
