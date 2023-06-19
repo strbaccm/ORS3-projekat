@@ -11,6 +11,7 @@ import memory.Memory;
 import memory.Disk;
 import memory.RAM;
 import shell.Shell;
+import fileSystem.FileSystem;
 
 
 public class ProcessScheduler{
@@ -77,6 +78,7 @@ public class ProcessScheduler{
 		else if (p.getPCB().getProcessState() == ProcessState.DONE) {
 			System.out.println("Process " + p.getName() + " is done!");
 			Memory.removeProcess(p);
+			FileSystem.createFile(p); 
 		} 
 		Operations.clearReg();
 	}
