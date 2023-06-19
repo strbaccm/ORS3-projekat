@@ -1,7 +1,7 @@
 package memory;
 
 public class Block {
-	private final static int size = 8;
+	private final static int size = 4;
 	private byte[] elements = new byte[size];
 	private final int index;
 	private boolean occupied;
