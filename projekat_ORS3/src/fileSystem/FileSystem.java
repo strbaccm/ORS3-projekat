@@ -11,7 +11,7 @@ import javafx.scene.control.TreeItem;
 import memory.StoredFile;
 import shell.Shell;
 import kernel.Process;
-import asembler.Operations;
+import assembler.Operations;
 
 public class FileSystem {
 	private static File rootFolder;
@@ -121,5 +121,4 @@ public class FileSystem {
 	public File getCurrentFolder() {
 		return currentFolder;
 	}
-	
 }
