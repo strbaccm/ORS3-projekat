@@ -241,14 +241,6 @@ public static void booting() {
 			while ( inst.length() < 16 )
 				inst = "0" + inst;
 		}
-		else if ( inst.length() <= 20 ) {
-			while ( inst.length() < 20)
-				inst = "0" + inst;
-		} 
-		else if (inst.length() <= 24) {
-			while ( inst.length() < 24)
-				inst = "0" + inst;
-		}
 		return inst;
 	}
 
