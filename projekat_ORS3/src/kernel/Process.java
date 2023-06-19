@@ -2,6 +2,7 @@ package kernel;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import memory.Memory;
@@ -21,11 +22,12 @@ public class Process implements Comparable<Process> {
 	private ArrayList<String> instructions;
 	private int pgCounter = 1;
 	
-	public Process(String name, Path path) {
+	public Process(String name) {
+		if (new File(Shell.tree.getCurrentFolder().getAbsolutePath() + "\\" + name).exists()){
 		this.pcb = new ProcessControlBlock();
 		this.processID = ProcessScheduler.listOfProcesses.size();
 		this.name = name;
-		this.path = path;
+		this.path = Paths.get(Shell.tree.getCurrentFolder().getAbsolutePath() + "\\" + name);
 		this.arrivalTime = new Date();
 		valuesOfRegisters = new int[4];
 		instructions = new ArrayList<>();
@@ -34,6 +36,10 @@ public class Process implements Comparable<Process> {
 		this.partition = null;
 		ProcessScheduler.listOfProcesses.add(this);
 		ProcessScheduler.processQueue.add(this);
+		}
+		else{
+			System.out.println("Program " + name + " doesn't exist in this directory");
+		}
 
 	}
 	
