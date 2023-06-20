@@ -207,7 +207,7 @@ public class Commands {
 			}
 		
 		else
-			System.out.println("Wrong entry!");
+			System.out.println("Wrong entry!\n");
 	}
 
 	public static void readCommand(PipedInputStream inp, int length) {
