@@ -112,7 +112,7 @@ public class Commands {
 			}
 		
 		else if (c.equals("execute")) {
-			new ProcessScheduler().start();
+			new ProcessScheduler().runProgram();
 		}
 		
 		else if (c.equals("proc")) {
