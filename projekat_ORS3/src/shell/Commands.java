@@ -9,9 +9,9 @@ import assembler.Operations;
 import fileSystem.FileSystem;
 import kernel.Process;
 import kernel.ProcessScheduler;
+import memory.Disk;
 import memory.Memory;
 import memory.RAM;
-import memory.Disk;
 
 public class Commands {
 	private static String command;
