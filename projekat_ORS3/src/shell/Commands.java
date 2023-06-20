@@ -195,7 +195,7 @@ public class Commands {
 				help += "PROC\t\tLists processes.\n";
 				help += "TERM\t\tTerminates process.\n";
 				help += "BLOCK\t\tBlocks process.\n";
-				help += "UBLOCK\t\tUnblocks process.\n";
+				help += "UNBLOCK\t\tUnblocks process.\n";
 				help += "DATE\t\tDisplays date.\n";
 				help += "TIME\t\tDisplays time.\n";
 				help += "CLS\t\tClears terminal.\n";
