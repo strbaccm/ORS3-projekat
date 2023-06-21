@@ -102,7 +102,7 @@ public class Operations {
 				//Smanjuje vrijednost registra za 1
 				public static void dec(String reg) {
 					Register r=getRegister(reg);
-					r.value=r.value+1;
+					r.value=r.value-1;
 				}
 				
 				//Prekida izvrsavanje
