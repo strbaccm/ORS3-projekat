@@ -106,13 +106,19 @@ public class Operations {
 				}
 				
 				//Prekida izvrsavanje
-				public static void hlt() {
-					
+			     public static void hlt() {
+				Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.DONE);
 				}
 				
-				public static void jmp (String adr) {
-					
-				}
+			     public static void jmp (String adr) {
+				int temp=Integer.parseInt(adr,2);
+			         if(temp>=Shell.limit) {
+			          Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
+			           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+			          return;
+				 }
+				  Shell.PC=temp;
+				 }
 				
 	private static Register getRegister(String address) {
 		switch (address) {
