@@ -49,12 +49,12 @@ public class Disk {
 					}
 				}
 		} else
-			System.out.println("File can not be stored");
+			System.out.println("File can not be stored!");
 	}
 
 	public void deleteFile(StoredFile file) {   
 		if (!files.contains(file))
-			System.out.println("File is not stored on disk");
+			System.out.println("File is not stored on disk!");
 		else {
 			BlockFile bf = file.getStartBlockFile();
 			file.setStartBlockFile(null);
