@@ -99,6 +99,10 @@ public class Process implements Comparable<Process> {
 	public int getPGCounter() {
 		return pgCounter;
 	}
+
+	public void setPGCounter(int pgCounter) {
+		this.pgCounter = pgCounter;
+	}
 	
 	public void incpgCOUNTER() {
 		pgCounter++;
