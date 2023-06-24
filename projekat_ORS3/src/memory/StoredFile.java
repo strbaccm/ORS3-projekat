@@ -62,7 +62,7 @@ public class StoredFile {
 		return elements;
 	}
 
-	public void setelements(byte[] bytes) {
+	public void setElements(byte[] bytes) {
 		elements = bytes;
 	}
 }
