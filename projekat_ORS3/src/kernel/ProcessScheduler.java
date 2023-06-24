@@ -1,18 +1,12 @@
 package kernel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.PriorityQueue;
-import java.util.Scanner;
 import assembler.Operations;
+import fileSystem.FileSystem;
 import memory.Memory;
-import memory.Disk;
 import memory.RAM;
 import shell.Shell;
-import fileSystem.FileSystem;
-
 
 public class ProcessScheduler{
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
