@@ -17,9 +17,6 @@ public class Shell {
 	public static String IR;
 	public static int base;
 	public static int limit;
-	public static int PC;
-
-
 	
 public static void booting() {
 		new ProcessScheduler();
@@ -32,7 +29,6 @@ public static void booting() {
 		String operation = IR.substring(0,4);
 	  	boolean programCounterChanged = false;
 
-		
 		if(operation.equals(Operations.hlt)) {
 			Operations.hlt();
 		}
@@ -89,7 +85,6 @@ public static void booting() {
 			String adr = IR.substring(4,12);
 			Operations.jmp(adr);
 		        programCounterChanged = true;
-
 		}
 		else if(operation.equals(Operations.inc)) {
 			String reg = IR.substring(4,8);
@@ -99,10 +94,8 @@ public static void booting() {
 			String reg = IR.substring(4,8);
 			Operations.dec(reg);
 		}
-	  if (!programCounterChanged)
-			PC++;
-	  currentlyExecuting.incpgCOUNTER();
-	  
+	  if (!programCounterChanged) 
+		  currentlyExecuting.incpgCOUNTER();
 	}
 
   public static String assemblerToMachineInstruction(String line) {
