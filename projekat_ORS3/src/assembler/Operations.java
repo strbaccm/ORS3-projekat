@@ -1,5 +1,8 @@
 package assembler;
 
+import kernel.ProcessState;
+import shell.Shell;
+
 public class Operations {
 	
 	public static final String hlt="0000";
@@ -114,10 +117,10 @@ public class Operations {
 				int temp=Integer.parseInt(adr,2);
 			         if(temp>=Shell.limit) {
 			          Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
-			           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+			           System.out.println("Error with address in process: "+Shell.currentlyExecuting.getName());
 			          return;
 				 }
-				  Shell.PC=temp;
+				  Shell.currentlyExecuting.setPGCounter(temp);
 				 }
 				
 	private static Register getRegister(String address) {
