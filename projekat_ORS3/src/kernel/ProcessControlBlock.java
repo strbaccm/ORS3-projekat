@@ -1,11 +1,5 @@
 package kernel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-
 public class ProcessControlBlock {
 	private ProcessState state;
 	private int priority;
