@@ -85,22 +85,11 @@ public class Disk {
 		return content;
 	}
 
-	private static int getFreeBlocksNumber() {   
+	public static int getFreeBlocksNumber() {   
 		int number = 0;
 		for (int i = 0; i < blocksNumber; i++)
 			if (!blocks[i].isOccupied())
 				number += 1;
-		return number;
-	}
-
-	private static int getOccupiedBlocksNumber(StoredFile file) {   
-		int number = 0;
-		BlockFile bf = file.getStartBlockFile();
-		number += 1;
-		while (bf.getNext() != null) {
-			bf = bf.getNext();
-			number += 1;
-		}
 		return number;
 	}
 
