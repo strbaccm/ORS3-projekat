@@ -147,11 +147,11 @@ public class Operations {
 	}
 	
 	public static void printReg() {
-		System.out.println("Registers:");
-		System.out.println("R1 value:["+R1.value+"]");
-		System.out.println("R2 value:["+R2.value+"]");
-		System.out.println("R3 value:["+R3.value+"]");
-		System.out.println("R4 value:["+R4.value+"]");
+		System.out.println("~~~~~~~~~~ REGISTERS ~~~~~~~~~~");
+		System.out.println("R1 value: ["+R1.value+"]");
+		System.out.println("R2 value: ["+R2.value+"]");
+		System.out.println("R3 value: ["+R3.value+"]");
+		System.out.println("R4 value: ["+R4.value+"]");
 	}
 	
 	
