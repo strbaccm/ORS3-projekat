@@ -1,20 +1,26 @@
 .root{
-	-fx-background-color:
-	    linear-gradient(to right top,
-	    	           #adc5cf, #a0c1d3, #94bcd8,
-	    	           #8bb7dd, #86b1e2, #77addf,
-	    	           #65a8dc, #51a4d9, #22a0c8,
-	    	           #009bb3, #00949b, #008c81);
-	}
+	-fx-background-image: url("picture.png");
+}
 	
 .text-area{
-	-fx-font-family: Consolas;
-	-fx-font-size:22;
-	-fx-text-box-border: black;
+	-fx-font-family: Calibri;
+	-fx-font-size: 22;
+	-fx-text-fill: #012833;
 }
+
 .text-area .content{
-    -fx-background-color:#ADC5CF;
+    -fx-background-color: 
+    linear-gradient(to right,
+    #845ec2, #806ecc, #7e7cd4, 
+    #7d8adb, #7f97e1, #6f9de1, 
+    #60a2de, #56a6da, #32a3ca, 
+    #0e9eb7, #0599a1, #20928a
+    );
 }
-.textfield {
--fx-background-color:#296073;
+
+.text-field {
+	-fx-font-family: Calibri;
+	-fx-font-size: 22;
+	-fx-text-fill: #012833;
+	-fx-background-color: #86A8E7;
 }
