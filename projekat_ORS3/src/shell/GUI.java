@@ -21,9 +21,6 @@ public class GUI extends Application {
 	private static String textToShow;
 	private static TextArea top=new TextArea();
 	private static TextField bottom=new TextField();
-	private static Button close;
-	private static Button min;
-	private static Button max;
 	private PipedInputStream input=new PipedInputStream();
 	private PipedOutputStream output=new PipedOutputStream();
 	private StringBuilder outSB=new StringBuilder();
@@ -51,16 +48,6 @@ public class GUI extends Application {
 		input.connect(output);
 		textToShow="";
 		
-		close=new Button("X");
-		close.setPrefSize(5, 5);
-		min=new Button("_");
-		max=new Button("❐");
-		
-		HBox buttons =new HBox(5);
-		buttons.setAlignment(Pos.TOP_RIGHT);
-		
-		buttons.getChildren().addAll(min,max,close);
-		
 		top=new TextArea();
 		top.setPrefSize(900,500);
 		top.setEditable(false);
@@ -69,25 +56,8 @@ public class GUI extends Application {
 		bottom =new TextField();
 		bottom.setPrefSize(900,70);
 		
-		close.setOnAction(e -> {
-			System.exit(0);
-		});
 		
-		min.setOnAction(e -> {
-			Stage stage=(Stage) min.getScene().getWindow();
-			stage.setIconified(true);
-			bottom.requestFocus();
-		}
-		);
-		max.setOnAction(e -> {
-			Stage stage=(Stage) max.getScene().getWindow();
-			if(!stage.isMaximized())
-				stage.setMaximized(true);
-			else
-				stage.setMaximized(false);
-			bottom.requestFocus();
-
-		});
+		
 		bottom.setOnAction(e -> {
 			
 			try {
@@ -128,7 +98,7 @@ public class GUI extends Application {
 		
 		VBox root =new VBox(15);
 		root.setPadding(new Insets(10,30,30,30));
-		root.getChildren().addAll(buttons, top,bottom);
+		root.getChildren().addAll(top,bottom);
 		VBox.setVgrow(top, Priority.ALWAYS);
 		Scene scena=new Scene(root,1200,650);
 		scena.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
