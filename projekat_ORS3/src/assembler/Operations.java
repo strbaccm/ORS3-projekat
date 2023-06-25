@@ -14,6 +14,8 @@ public class Operations {
 	public static final String dec ="0110";
 	public static final String inc ="0111";
 	public static final String div ="1000";
+	public static final String cmpe="1001";
+	public static final String cmpd="1010";
 	
 	public static Register R1=new Register("R1",Constants.R1,0);
 	public static Register R2=new Register("R2",Constants.R2,0);
@@ -122,6 +124,78 @@ public class Operations {
 				 }
 				  Shell.currentlyExecuting.setPGCounter(temp);
 				 }
+	                public static boolean cmpe(String reg,String val,String adr) {
+			    	 Register r1=getRegister(reg);
+			    	 if(val.length()==8) {//val je vrijednost
+			    		if(r1!=null && r1.value==Integer.parseInt(val,2)) {
+			    			int temp=Integer.parseInt(adr,2);
+			    			if(temp>=Shell.limit) {
+			    				Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
+						           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+						          return false;
+			    				
+			    			}
+			    		Shell.currentlyExecuting.setPGCounter(temp);
+			    		return true;
+			    		}
+			    		
+			    		 
+			    	 }
+			    	 else if(val.length()==4) {//drugi arg je registar
+			    	Register r2=getRegister(val);
+			    	if(r1!=null && r2!=null && r1.value==r2.value) {
+			    		int temp=Integer.parseInt(adr,2);
+			    		if(temp>=Shell.limit) {
+		    				Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
+					           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+					          return false;
+		    				
+		    			}
+		    		Shell.currentlyExecuting.setPGCounter(temp);
+		    		return true;
+		    		}
+		    		
+		    		 
+		    	 }
+			    	 return false;
+			    	}
+	
+	                 public static boolean cmpd(String reg,String val,String adr) {
+			    	 Register r1=getRegister(reg);
+			    	 if(val.length()==8) {//val je vrijednost
+			    		if(r1!=null && r1.value!=Integer.parseInt(val,2)) {
+			    			int temp=Integer.parseInt(adr,2);
+			    			if(temp>=Shell.limit) {
+			    				Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
+						           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+						          return false;
+			    				
+			    			}
+			    		Shell.currentlyExecuting.setPGCounter(temp);
+			    		return true;
+			    		}
+			    		
+			    		 
+			    	 }
+			    	 else if(val.length()==4) {//drugi arg je registar
+			    	Register r2=getRegister(val);
+			    	if(r1!=null && r2!=null && r1.value!=r2.value) {
+			    		int temp=Integer.parseInt(adr,2);
+			    		if(temp>=Shell.limit) {
+		    				Shell.currentlyExecuting.getPCB().setProcessState(ProcessState.TERMINATED);
+					           System.out.println("Error with adress in process:"+Shell.currentlyExecuting.getName());
+					          return false;
+		    				
+		    			}
+		    		Shell.currentlyExecuting.setPGCounter(temp);
+		    		return true;
+		    		}
+		    		
+		    		 
+		    	 }
+			    	 return false;
+			    	}
+			     
 				
 	private static Register getRegister(String address) {
 		switch (address) {
