@@ -120,8 +120,8 @@ public class Disk {
 	}
 
 	public static void printDisk() {   
-		System.out.println("Disk");
-		System.out.println("File\t\tStart block\t\tLength");
+		System.out.println("~~~~~~~~~~ DISK ~~~~~~~~~~");
+		System.out.println("File" + "\t\t" + "Start block" + "\t\t" + "Length");
 		for (StoredFile file: files)
 			System.out.println(file.getName() + "\t\t" + file.getStartBlockFile().getBlock().getIndex() + 
 			"\t\t" + file.getLength());
