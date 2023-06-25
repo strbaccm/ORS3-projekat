@@ -152,7 +152,8 @@ public class Memory {
 		return 0;
 	}
 	
-	public static void printMemory() {  
+	public static void printMemory() { 
+		System.out.println("~~~~~~~~~~ MEMORY ~~~~~~~~~~");  
 		RAM.printRAM();
 		Operations.printReg();
 		Disk.printDisk();
