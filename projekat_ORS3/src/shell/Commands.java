@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedInputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import assembler.Operations;
 import fileSystem.FileSystem;
 import kernel.Process;
@@ -25,7 +24,7 @@ public class Commands {
 			if (cp.length == 1) 
 				FileSystem.listFiles();
 			else
-				System.out.println("Incorrect parameters!\n");	
+				System.out.println("Incorrect parameters!");	
 			}
 		
 		else if (c.equals("cd")) {
@@ -34,7 +33,7 @@ public class Commands {
 				FileSystem.changeDirectory(p);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");	
+				System.out.println("Incorrect parameters!");	
 			}
 		
 		else if (c.equals("mkdir")) {
@@ -43,7 +42,7 @@ public class Commands {
 				FileSystem.makeDirectory(p);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("deldir")) {
@@ -52,7 +51,7 @@ public class Commands {
 				FileSystem.deleteDirectory(p);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("delf")) {
@@ -61,7 +60,7 @@ public class Commands {
 				FileSystem.deleteFile(p);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("ren")) {
@@ -71,35 +70,35 @@ public class Commands {
 				FileSystem.renameDirectory(p1, p2);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");	
+				System.out.println("Incorrect parameters!");	
 			}
 		
 		else if (c.equals("mem")) {
 			if (cp.length == 1) 
 				Memory.printMemory();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("memram")) {
 			if (cp.length == 1) 
 				RAM.printRAM();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("memreg")) {
 			if (cp.length == 1) 
 				Operations.printReg();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("memdisk")) {
 			if (cp.length == 1) 
 				Disk.printDisk();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("load")) {
@@ -108,7 +107,7 @@ public class Commands {
 				new Process(p);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("execute")) {
@@ -119,7 +118,7 @@ public class Commands {
 			if (cp.length == 1) 
 				ProcessScheduler.printProcesses();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("term")) {
@@ -128,7 +127,7 @@ public class Commands {
 				ProcessScheduler.terminateProcess(Integer.parseInt(p));
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("block")) {
@@ -137,7 +136,7 @@ public class Commands {
 				ProcessScheduler.blockProcess(Integer.parseInt(p));
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("unblock")) {
@@ -146,35 +145,35 @@ public class Commands {
 				ProcessScheduler.unblockProcess(Integer.parseInt(p));
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("date")) {
 			if (cp.length == 1) 
 				System.out.println(java.time.LocalDate.now());    
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("time")) {
 			if (cp.length == 1) 
 				System.out.println(java.time.LocalTime.now()); 
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("cls")) {
 			if (cp.length == 1) 
 				GUI.clear();
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("exit")) {
 			if (cp.length == 1) 
 				System.exit(1);
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else if (c.equals("help")) {
@@ -199,15 +198,15 @@ public class Commands {
 				help += "DATE" + "\t\t" + "Displays date.\n";
 				help += "TIME" + "\t\t" + "Displays time.\n";
 				help += "CLS" + "\t\t" + "Clears terminal.\n";
-				help += "EXIT" + "\t\t" + "Closes program.\n";
+				help += "EXIT" + "\t\t" + "Closes program.";
 				System.out.println(help);
 			}
 			else
-				System.out.println("Incorrect parameters!\n");		
+				System.out.println("Incorrect parameters!");		
 			}
 		
 		else
-			System.out.println("Wrong entry!\n");
+			System.out.println("Wrong entry!");
 	}
 
 	public static void readCommand(PipedInputStream inp, int length) {
@@ -219,7 +218,7 @@ public class Commands {
 				command += c;
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("Error occurred while reading the command!\n");
+				System.out.println("Error occurred while reading the command!");
 			}
 		}
 	}
