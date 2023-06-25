@@ -1,0 +1,20 @@
+.root{
+	-fx-background-color:
+	    linear-gradient(to right top,
+	    	           #adc5cf, #a0c1d3, #94bcd8,
+	    	           #8bb7dd, #86b1e2, #77addf,
+	    	           #65a8dc, #51a4d9, #22a0c8,
+	    	           #009bb3, #00949b, #008c81);
+	}
+	
+.text-area{
+	-fx-font-family: Consolas;
+	-fx-font-size:22;
+	-fx-text-box-border: black;
+}
+.text-area .content{
+    -fx-background-color:#ADC5CF;
+}
+.textfield {
+-fx-background-color:#296073;
+}
