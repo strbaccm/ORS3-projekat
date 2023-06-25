@@ -29,7 +29,7 @@ public class ProcessScheduler{
 		return priority;
 	}
 	
-	public static void runProgram() {
+	public void runProgram() {
 		while(!processQueue.isEmpty()) {
 			Process next = processQueue.poll();
 			executeProcess(next);
