@@ -13,13 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.StageStyle;
-
-
 
 public class GUI extends Application {
 	private static String textToShow;
@@ -65,11 +61,10 @@ public class GUI extends Application {
 		
 		buttons.getChildren().addAll(min,max,close);
 		
-		
 		top=new TextArea();
 		top.setPrefSize(900,500);
 		top.setEditable(false);
-		top.setText("WELCOME!\nType help for list of commands.");
+		top.setText("WELCOME!\nType HELP for list of commands.\n");
 		
 		bottom =new TextField();
 		bottom.setPrefSize(900,70);
@@ -142,9 +137,5 @@ public class GUI extends Application {
 		primaryStage.show();
 		bottom.requestFocus();
 		
-		
-	
-	
-
-	
-}}
+	}
+}
