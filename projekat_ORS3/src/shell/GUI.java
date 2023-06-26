@@ -109,7 +109,7 @@ public class GUI extends Application {
 		
 		VBox root =new VBox(15);
 		root.setPadding(new Insets(10,30,30,30));
-		root.getChildren().addAll(top,bottom);
+		root.getChildren().addAll(buttons,top,bottom);
 		VBox.setVgrow(top, Priority.ALWAYS);
 		Scene scena=new Scene(root,1200,650);
 		scena.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
