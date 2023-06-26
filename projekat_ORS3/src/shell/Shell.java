@@ -94,6 +94,35 @@ public static void booting() {
 			String reg = IR.substring(4,8);
 			Operations.dec(reg);
 		}
+		else if(operation.equals(Operations.cmpd)) {
+			String reg = IR.substring(4,8);
+			String val = null;
+			String adr = null;
+			if(IR.length() == 20) {//oba registra
+				val = IR.substring(8,12);
+				adr = IR.substring(12,20);
+			}
+			else if( IR.length() == 24) {//registar i vrijednost
+				val = IR.substring(8,16);
+				adr = IR.substring(16, 24);
+			}
+			programCounterChanged = Operations.cmpd(reg, val, adr);
+			
+		}
+		else if(operation.equals(Operations.cmpe)) {
+			String reg = IR.substring(4,8);
+			String val = null;
+			String adr = null;
+			if(IR.length() == 20) {//oba registra
+				val = IR.substring(8,12);
+				adr = IR.substring(12,20);
+			}
+			else if( IR.length() == 24) {//registar i vrijednost
+				val = IR.substring(8,16);
+				adr = IR.substring(16, 24);
+			}
+			programCounterChanged = Operations.cmpe(reg, val, adr);
+		}
 	  if (!programCounterChanged) 
 		  currentlyExecuting.incpgCOUNTER();
 	}
@@ -130,6 +159,12 @@ public static void booting() {
 		else if(command[0].equals("DIV")) {
 			instruction += Operations.div;
 		}
+	  	else if(command[0].equals("CMPE")) {
+			instruction += Operations.cmpe;
+		}
+		else if(command[0].equals("CMPD")) {
+			instruction += Operations.cmpd;
+		}
 		
 		// OBRADA UKOLIKO NAM JE OPERACIJA HLT
 		if(command[0].equals("HLT")) {
@@ -139,6 +174,44 @@ public static void booting() {
 		else if(command[0].equals("JMP")) {
 			instruction += toBinary(command[1]);
 			return instruction;
+		}
+		//OBRADA UKOLIKO SU OPERACIJE CMPD ILI CMPE
+		else if(command[0].equals("CMPD") || command[0].equals("CMPE")) {
+			//REGISTAR
+			if(command[1].equals("R1")) {
+				instruction += Constants.R1;
+			}
+			else if(command[1].equals("R2")) {
+				instruction += Constants.R2;
+			}
+			else if(command[1].equals("R3")) {
+				instruction += Constants.R3;
+			}
+			else if(command[1].equals("R4")) {
+				instruction += Constants.R4;
+			}
+			//PROVJERA DA LI JE REGISTAR ILI VRIJEDNOST
+		if(!command[2].equals("R1") || !command[2].equals("R2") || 
+				!command[2].equals("R3") || !command[2].equals("R4")) {	
+			instruction += toBinary(command[2]);
+		}
+		else {
+			if(command[2].equals("R1")) {
+				instruction += Constants.R1;
+			}
+			else if(command[2].equals("R2")) {
+				instruction += Constants.R2;
+			}
+			else if(command[2].equals("R3")) {
+				instruction += Constants.R3;
+			}
+			else if(command[2].equals("R4")) {
+				instruction += Constants.R4;
+			}
+		}
+		//ADRESA
+		instruction += toBinary(command[3]); 
+		return instruction;	
 		}
 		//SLUCAJ KADA SU NA PRVOJ POZICIJI OPERACIJE DEC I INC
 		else if(command[0].equals("INC") || command[0].equals("DEC")) {
@@ -241,6 +314,14 @@ public static void booting() {
 		}
 		else if( inst.length() <= 16 ) {
 			while ( inst.length() < 16 )
+				inst = "0" + inst;
+		}
+	  	else if( inst.length() <= 20 ) {
+			while ( inst.length() < 20)
+				inst = "0" + inst;
+		}
+		else if(  inst.length() <= 24 ) {
+			while ( inst.length() < 24 )
 				inst = "0" + inst;
 		}
 		return inst;
