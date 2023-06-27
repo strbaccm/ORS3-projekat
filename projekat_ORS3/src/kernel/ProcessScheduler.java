@@ -50,7 +50,7 @@ public class ProcessScheduler{
 
 	private static void executeP(Process p) {	
 		while(p.getPCB().getProcessState() == ProcessState.RUNNING) {
-			int ramValue = RAM.get(Shell.base);
+			int ramValue = RAM.get(Shell.base + Shell.PC);
 			String instruction = Shell.fromIntToInstruction(ramValue);
 			Shell.IR = instruction;
 			Shell.executeMachineInstruction();
@@ -63,7 +63,6 @@ public class ProcessScheduler{
 		if (p.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			System.out.println("Process " + p.getName() + " is blocked!");
 			Shell.saveValues();
-			p.setStartAdress(p.getStartAdress() + p.getPGCounter());
 		}
 		else if (p.getPCB().getProcessState() == ProcessState.TERMINATED) {
 			System.out.println("Process " + p.getName() + " is terminated!");
