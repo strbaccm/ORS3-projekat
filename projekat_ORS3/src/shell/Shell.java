@@ -17,6 +17,7 @@ public class Shell {
 	public static String IR;
 	public static int base;
 	public static int limit;
+	public static int PC;
 	
 public static void booting() {
 		new ProcessScheduler();
@@ -124,7 +125,7 @@ public static void booting() {
 			programCounterChanged = Operations.cmpe(reg, val, adr);
 		}
 	  if (!programCounterChanged) 
-		  currentlyExecuting.incpgCOUNTER();
+		   PC++;
 	}
 
   public static String assemblerToMachineInstruction(String line) {
@@ -284,7 +285,7 @@ public static void booting() {
 
   private static String toBinary(String s) {
 		int number = Integer.parseInt(s);
-		int []binary = new int[10];
+		int []binary = new int[8];
 		int index = 0;
 		int counter = 0;
 		while(number > 0) {
@@ -306,7 +307,7 @@ public static void booting() {
 		String inst = Integer.toBinaryString(val);
 		if( inst == "0")
 			inst = "0000";
-		else if( inst.length() == 0 )
+		else if( inst.length() == 8 )
 			return inst;
 		else if( inst.length() <= 12 ) {
 			while ( inst.length() < 12)
@@ -330,6 +331,7 @@ public static void booting() {
   public static void saveValues() {
 		int [] registers = {Operations.R1.value, Operations.R2.value, Operations.R3.value, Operations.R4.value};
 		currentlyExecuting.setValuesOfRegisters(registers);
+	  	currentlyExecuting.setPcValue(PC);
 	}
   
   public static void loadValues() {
@@ -338,5 +340,6 @@ public static void booting() {
 		Operations.R2.value = registers[1];
 		Operations.R3.value = registers[2];
 		Operations.R4.value = registers[3];
+	  	PC = currentlyExecuting.getPcValue();
 	}
 }
