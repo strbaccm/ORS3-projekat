@@ -8,7 +8,7 @@ import memory.Memory;
 import memory.RAM;
 import shell.Shell;
 
-public class ProcessScheduler{
+public class ProcessScheduler extends Thread {
 	public static ArrayList<Process> listOfProcesses = new ArrayList<>();
 	public static PriorityQueue<Process> processQueue = new PriorityQueue<>();
 	
@@ -29,7 +29,7 @@ public class ProcessScheduler{
 		return priority;
 	}
 	
-	public void runProgram() {
+	public void run() {
 		while(!processQueue.isEmpty()) {
 			Process next = processQueue.poll();
 			executeProcess(next);
@@ -54,11 +54,13 @@ public class ProcessScheduler{
 			String instruction = Shell.fromIntToInstruction(ramValue);
 			Shell.IR = instruction;
 			Shell.executeMachineInstruction();
-		}
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("Error with thread");
+			System.out.println("Process " + p.getName() + " is executing!");
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if (p.getPCB().getProcessState() == ProcessState.BLOCKED) {
 			System.out.println("Process " + p.getName() + " is blocked!");
