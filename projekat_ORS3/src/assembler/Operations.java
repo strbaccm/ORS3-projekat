@@ -122,7 +122,7 @@ public class Operations {
 			           System.out.println("Error with address in process: "+Shell.currentlyExecuting.getName());
 			          return;
 				 }
-				  Shell.currentlyExecuting.setPGCounter(temp);
+				  Shell.PC = temp;
 				 }
 	                public static boolean cmpe(String reg,String val,String adr) {
 			    	 Register r1=getRegister(reg);
@@ -135,7 +135,7 @@ public class Operations {
 						          return false;
 			    				
 			    			}
-			    		Shell.currentlyExecuting.setPGCounter(temp);
+			    		Shell.PC = temp;
 			    		return true;
 			    		}
 			    		
@@ -151,7 +151,7 @@ public class Operations {
 					          return false;
 		    				
 		    			}
-		    		Shell.currentlyExecuting.setPGCounter(temp);
+		    		Shell.PC = temp;
 		    		return true;
 		    		}
 		    		
@@ -171,7 +171,7 @@ public class Operations {
 						          return false;
 			    				
 			    			}
-			    		Shell.currentlyExecuting.setPGCounter(temp);
+			    		Shell.PC = temp;
 			    		return true;
 			    		}
 			    		
@@ -187,7 +187,7 @@ public class Operations {
 					          return false;
 		    				
 		    			}
-		    		Shell.currentlyExecuting.setPGCounter(temp);
+		    		Shell.PC = temp;
 		    		return true;
 		    		}
 		    		
