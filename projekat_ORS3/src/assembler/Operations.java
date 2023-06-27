@@ -218,6 +218,7 @@ public class Operations {
 		R2.value=0;
 		R3.value=0;
 		R4.value=0;
+		Shell.PC = 0;
 	}
 	
 	public static void printReg() {
