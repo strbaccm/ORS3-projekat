@@ -19,7 +19,7 @@ public class Process implements Comparable<Process> {
 	private int startAdress;
 	private int[] valuesOfRegisters;
 	private ArrayList<String> instructions;
-	private int pgCounter = 1;
+	private int pcValue = -1;
 	
 	public Process(String name) {
 		if (new File(Shell.tree.getCurrentFolder().getAbsolutePath() + "\\" + name).exists()){
@@ -95,16 +95,12 @@ public class Process implements Comparable<Process> {
 			this.valuesOfRegisters[i] = valuesOfRegisters[i];
 	}
 
-	public int getPGCounter() {
-		return pgCounter;
+	public int getPcValue() {
+		return pcValue;
 	}
 
-	public void setPGCounter(int pgCounter) {
-		this.pgCounter = pgCounter;
-	}
-	
-	public void incpgCOUNTER() {
-		pgCounter++;
+	public void setPcValue(int pcValue) {
+		this.pcValue = pcValue;
 	}
 	
 	public int getStartAdress() {
