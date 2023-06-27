@@ -10,9 +10,9 @@ public class Operations {
 	public static final String add ="0010";
 	public static final String sub ="0011";
 	public static final String mul ="0100";
-	public static final String jmp ="0101";
-	public static final String dec ="0110";
-	public static final String inc ="0111";
+	public static final String jmp ="1101";
+	public static final String dec ="1110";
+	public static final String inc ="1111";
 	public static final String div ="1000";
 	public static final String cmpe="1001";
 	public static final String cmpd="1010";
