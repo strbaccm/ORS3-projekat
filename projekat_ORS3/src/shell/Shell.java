@@ -35,8 +35,14 @@ public static void booting() {
 		}
 		else if(operation.equals(Operations.mov)) {
 			String r1 = IR.substring(4,8);
-			String r2 = IR.substring(8,12);
-			Operations.mov(r1,r2);
+			if( IR.length() == 12) {
+				String r2 = IR.substring(8,12);
+				Operations.mov(r1,r2);
+			}
+			else if( IR.length() == 16) {
+				String val2 = IR.substring(8,16);
+				Operations.mov(r1,val2);
+			}
 		}
 		else if(operation.equals(Operations.add)) {
 			String r1 = IR.substring(4,8);
