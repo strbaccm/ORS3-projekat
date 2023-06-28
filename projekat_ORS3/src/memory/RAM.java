@@ -81,10 +81,13 @@ public class RAM {
 	
 	public static void printRAM() {
 		System.out.println("~~~~~~~~~~ RAM ~~~~~~~~~~");
+		System.out.print("| ");
 		for (int i = 0; i < size; i++) {
-			if (i % 27 == 0 && i != 0)
+			if (i % 14 == 0 && i != 0) {
 				System.out.println();
-			System.out.print(ram[i] + "\t");
+				System.out.print("| ");
+			}
+			System.out.print(ram[i] + " | ");
 		}
 		System.out.println();
 	}
