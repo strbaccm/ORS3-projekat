@@ -117,11 +117,26 @@ public class ProcessScheduler extends Thread {
 	}
 
 	public static void printProcesses() {
-		System.out.println("PID\t\tProgram\t\tSize\t\tState\t\tCurrent occupation of memory");
-		for (Process process : listOfProcesses)
-			System.out.println(process.getProcessID() + "\t\t" + process.getName() + "\t\t" + process.getSize() + "\t\t"
-					+ process.getPCB().getProcessState() + "\t\t" +
-					+ Memory.memoryOccupiedByProcessSize(process));
+		System.out.println("PID\t\t\tProgram\t\t\t\tSize\t\t\tState\t\t\t\tCurrent occupation of memory");
+		for (Process process : listOfProcesses) {
+			String print = "";
+			print += process.getProcessID() + "\t\t\t";
+			if (process.getName().length() < 8)
+				print += process.getName() + "\t\t\t\t";
+			else if (process.getName().length() < 12)
+				print += process.getName() + "\t\t\t";
+			else
+				print += process.getName() + "\t\t";
+			print += process.getSize() + "\t\t\t";
+			if (process.getPCB().getProcessState().toString().length() < 7)
+				print += process.getPCB().getProcessState() + "\t\t\t\t";
+			else if (process.getPCB().getProcessState().toString().length() < 9)
+				print += process.getPCB().getProcessState() + "\t\t\t";
+			else
+				print += process.getPCB().getProcessState() + "\t\t";
+			print += Memory.memoryOccupiedByProcessSize(process);
+			System.out.println(print);
+		}
 	}
 	
 	public PriorityQueue<Process> getProcessQueue(){
