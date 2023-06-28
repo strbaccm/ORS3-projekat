@@ -35,9 +35,10 @@ public class Process implements Comparable<Process> {
 		this.partition = null;
 		ProcessScheduler.listOfProcesses.add(this);
 		ProcessScheduler.processQueue.add(this);
+		System.out.println("Program " + name + " is loaded!");
 		}
 		else{
-			System.out.println("Program " + name + " doesn't exist in this directory");
+			System.out.println("Program " + name + " doesn't exist in this directory!");
 		}
 
 	}
@@ -72,7 +73,7 @@ public class Process implements Comparable<Process> {
 			this.getPCB().setProcessState(ProcessState.READY);
 			this.setArrivalTime(new Date());
 			ProcessScheduler.processQueue.add(this);
-			System.out.println("Process " + this.getName() + " is unblocked");
+			System.out.println("Process " + this.getName() + " is unblocked!");
 			
 		}
 	}
