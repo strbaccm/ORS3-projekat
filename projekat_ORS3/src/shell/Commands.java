@@ -179,26 +179,26 @@ public class Commands {
 		else if (c.equals("help")) {
 			if (cp.length == 1) {
 				String help = "";
-				help += "DIR" + "\t\t" + "Lists files and subdirectories in directory.\n";
-				help += "CD" + "\t\t" + "Changes directories.\n";
-				help += "MKDIR" + "\t\t" + "Creates a directory.\n";
-				help += "DELDIR" + "\t\t" + "Deletes directories.\n";
-				help += "DELF" + "\t\t" + "Deletes files.\n";
-				help += "REN" + "\t\t" + "Renames directories.\n";
-				help += "MEM" + "\t\t" + "Shows RAM, registers and disk.\n";
+				help += "DIR" + "\t\t\t\t" + "Lists files and subdirectories in directory.\n";
+				help += "CD" + "\t\t\t\t" + "Changes directories.\n";
+				help += "MKDIR" + "\t\t\t" + "Creates a directory.\n";
+				help += "DELDIR" + "\t\t\t" + "Deletes directories.\n";
+				help += "DELF" + "\t\t\t" + "Deletes files.\n";
+				help += "REN" + "\t\t\t\t" + "Renames directories.\n";
+				help += "MEM" + "\t\t\t" + "Shows RAM, registers and disk.\n";
 				help += "MEMRAM" + "\t\t" + "Shows RAM.\n";
 				help += "MEMREG" + "\t\t" + "Shows registers.\n";
 				help += "MEMDISK" + "\t\t" + "Shows disk.\n";
-				help += "LOAD" + "\t\t" + "Loads process.\n";
+				help += "LOAD" + "\t\t\t" + "Loads process.\n";
 				help += "EXECUTE" + "\t\t" + "Starts executing processes.\n";
-				help += "PROC" + "\t\t" + "Lists processes.\n";
-				help += "TERM" + "\t\t" + "Terminates process.\n";
-				help += "BLOCK" + "\t\t" + "Blocks process.\n";
+				help += "PROC" + "\t\t\t" + "Lists processes.\n";
+				help += "TERM" + "\t\t\t" + "Terminates process.\n";
+				help += "BLOCK" + "\t\t\t" + "Blocks process.\n";
 				help += "UNBLOCK" + "\t\t" + "Unblocks process.\n";
-				help += "DATE" + "\t\t" + "Displays date.\n";
-				help += "TIME" + "\t\t" + "Displays time.\n";
-				help += "CLS" + "\t\t" + "Clears terminal.\n";
-				help += "EXIT" + "\t\t" + "Closes program.";
+				help += "DATE" + "\t\t\t" + "Displays date.\n";
+				help += "TIME" + "\t\t\t" + "Displays time.\n";
+				help += "CLS" + "\t\t\t\t" + "Clears terminal.\n";
+				help += "EXIT" + "\t\t\t\t" + "Closes program.";
 				System.out.println(help);
 			}
 			else
