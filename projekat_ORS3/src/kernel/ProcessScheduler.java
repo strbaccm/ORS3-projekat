@@ -38,14 +38,28 @@ public class ProcessScheduler extends Thread {
 	}
 	
 	private static void executeProcess(Process p) {
+		if(p.getPcValue() == -1) {
 		Shell.currentlyExecuting = p;
 		System.out.println("Process " + p.getName() + " started executiong!");
 		int startAdress = Shell.memory.loadProcess(p);
 		p.setStartAdress(startAdress);
 		Shell.base = startAdress;
 		Shell.limit = p.getInstructions().size();
+		Shell.PC = 0;
 		p.getPCB().setProcessState(ProcessState.RUNNING);
 		executeP(p);
+		}
+		else {
+			Shell.currentlyExecuting = p;
+			System.out.println("Process " + p.getName() + " is unblocked and started executing again!");
+			int startAdress = Shell.memory.loadProcess(p);
+			p.setStartAdress(startAdress);
+			Shell.base = startAdress;
+			Shell.limit = p.getInstructions().size();
+			Shell.loadValues();
+			p.getPCB().setProcessState(ProcessState.RUNNING);
+			executeP(p);
+		}
 	}
 
 	private static void executeP(Process p) {	
