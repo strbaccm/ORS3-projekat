@@ -40,7 +40,7 @@ public class ProcessScheduler extends Thread {
 	private static void executeProcess(Process p) {
 		if(p.getPcValue() == -1) {
 		Shell.currentlyExecuting = p;
-		System.out.println("Process " + p.getName() + " started executiong!");
+		System.out.println("Process " + p.getName() + " started executing!");
 		int startAdress = Shell.memory.loadProcess(p);
 		p.setStartAdress(startAdress);
 		Shell.base = startAdress;
@@ -97,7 +97,7 @@ public class ProcessScheduler extends Thread {
 			listOfProcesses.get(pID).block();
 			return;
 		}
-		System.out.println("Process with this processID " + pID + " doesn't exist");
+		System.out.println("Process with this processID " + pID + " doesn't exist!");
 	}
 	
 	public static void unblockProcess(int pID) {
@@ -105,7 +105,7 @@ public class ProcessScheduler extends Thread {
 			listOfProcesses.get(pID).unblock();
 			return;
 		}
-		System.out.println("Process with this processID " + pID + " doesn't exist");
+		System.out.println("Process with this processID " + pID + " doesn't exist!");
 	}
 	
 	public static void terminateProcess(int pID) {
@@ -113,14 +113,14 @@ public class ProcessScheduler extends Thread {
 			listOfProcesses.get(pID).terminate();
 			return;
 		}
-		System.out.println("Process with this processID " + pID + " doesn't exist");
+		System.out.println("Process with this processID " + pID + " doesn't exist!");
 	}
 
 	public static void printProcesses() {
-		System.out.println("PID\tProgram\t\tSize\tState\t\tCurrent occupation of memory");
+		System.out.println("PID\t\tProgram\t\tSize\t\tState\t\tCurrent occupation of memory");
 		for (Process process : listOfProcesses)
-			System.out.println(process.getProcessID() + "\t" + process.getName() + "\t  " + process.getSize() + "\t"
-					+ process.getPCB().getProcessState() + "\t " +
+			System.out.println(process.getProcessID() + "\t\t" + process.getName() + "\t\t" + process.getSize() + "\t\t"
+					+ process.getPCB().getProcessState() + "\t\t" +
 					+ Memory.memoryOccupiedByProcessSize(process));
 	}
 	
