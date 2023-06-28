@@ -59,7 +59,7 @@ public class FileSystem {
 			if (file.getValue().isDirectory())
 				System.out.println("Folder\t\t" + file.getValue().getName());
 			else
-				System.out.println("File\t\t" + file.getValue().getName());
+				System.out.println("File\t\t\t" + file.getValue().getName());
 		}
 	}
 	
