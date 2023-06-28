@@ -6,13 +6,15 @@ import kernel.Process;
 import kernel.ProcessState;
 
 public class Memory {
-	private static int indexLast = 0;
-	private static int lengthLast = 1;
+	public static int indexLast;
+	public static int lengthLast;
 	public static ArrayList<Partition> partitionsRAM;
 
 	public Memory() {   
 		RAM.initialize();
 		Partition.initialize();
+		indexLast = 0;
+		lengthLast = 1;
 		partitionsRAM = new ArrayList<>();
 	}
 
@@ -133,6 +135,7 @@ public class Memory {
 				currentSize += 1;
 			}
 		}
+		newIndex = currentIndex;
 		if (newIndex == -1) { 
 			defragmentation(); 
 			newIndex = RAM.getOccupiedSize();
@@ -152,7 +155,7 @@ public class Memory {
 		return 0;
 	}
 	
-	public static void printMemory() { 
+	public static void printMemory() {  
 		System.out.println("~~~~~~~~~~ MEMORY ~~~~~~~~~~");  
 		RAM.printRAM();
 		Operations.printReg();
