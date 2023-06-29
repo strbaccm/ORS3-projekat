@@ -128,7 +128,7 @@ public class Disk {
 				print += file.getName() + "\t\t\t\t\t";
 			else if (file.getName().length() <12)
 				print += file.getName() + "\t\t\t\t";
-			else if (file.getName().length() < 20)
+			else if (file.getName().length() < 16)
 				print += file.getName() + "\t\t\t";
 			else
 				print += file.getName() + "\t\t";
