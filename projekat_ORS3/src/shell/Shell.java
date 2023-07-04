@@ -230,11 +230,11 @@ public static void booting() {
 			else if(command[1].equals("R2")) {
 				instruction += Constants.R2;
 			}
-			else if(command[1].equals("R2")) {
-				instruction += Constants.R2;
+			else if(command[1].equals("R3")) {
+				instruction += Constants.R3;
 			}
-			else if(command[1].equals("R2")) {
-				instruction += Constants.R2;
+			else if(command[1].equals("R4")) {
+				instruction += Constants.R4;
 			}
 			return instruction;
 		}
